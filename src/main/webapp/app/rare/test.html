@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="documentApp">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+
+    <script src="../../Frame/jQuery/jquery.min.js"></script>
+    <script src="../../Frame/angular/angular.js"></script>
+    <script src="../../Frame/template/template.js"></script>
+    <script src="../../Frame/icheck/icheck.js"></script>
+    <link rel="stylesheet" href="../../Frame/icheck/demo/css/normalize.css">
+    <script src="js/documentApp.js"></script>
+    <script src="js/html-controller.js"></script>
+    <script>
+        $(function(){
+            $.get("/api/template/get-value-html?name=select&pubFlag=0",function(data){
+                var html = template("select",data);
+                htmlObject.setValue(html);
+                $("#html").html(htmlObject.htmlResult);
+            })
+        })
+    </script>
+
+</head>
+<body>
+<form method="post" action="/api/file/upload" enctype="multiapart/form-data">
+    <input type="file" name="file">
+    <input type="submit">上传</input>
+</form>
+
+<div ng-controller="htmlCtrl">
+    <div id="html">
+
+    </div>
+    <button class="btn" id="setHtml" ng-click="setValue();" >设置</button>
+</div>
+
+
+</body>
+</html>
